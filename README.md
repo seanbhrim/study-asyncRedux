@@ -1,1 +1,1 @@
-# study-redux-saga
+# study-asyncRedux
