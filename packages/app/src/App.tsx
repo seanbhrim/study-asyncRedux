@@ -1,26 +1,24 @@
-import React from 'react';
-import { getSlowResponse } from './api';
+import React, { useCallback } from 'react';
+import { useAppDispatch } from './redux';
+import { sagaBasicGetRequest, sagaBasicPostRequest } from './redux/sagaExamples/basic';
 import { useAppState } from './redux/selector';
 
 const App = () => {
+  const dispatch = useAppDispatch();
   const {data} = useAppState()
 
-  const handlePress = async () => {
-    try {
-      const {data} = await getSlowResponse()
-
-      console.log(data)
-
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  const handleHello = useCallback(() => dispatch(sagaBasicGetRequest()), [dispatch])
+  const handleEcho = useCallback(() => dispatch(sagaBasicPostRequest('Hah')), [dispatch])
 
   return (
     <div>
       <button
-        onClick={handlePress}>
-        Press
+        onClick={handleHello}>
+        Hello
+      </button>
+      <button
+        onClick={handleEcho}>
+        Echo
       </button>
       {JSON.stringify(data)}
     </div>

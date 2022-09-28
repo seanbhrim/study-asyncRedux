@@ -1,10 +1,12 @@
 export interface IAppState {
   data: object;
+  failed: boolean;
   loading: boolean;
 }
 
 const appState: IAppState = {
-  data: {text: 'Hello World'},
+  data: {},
+  failed: false,
   loading: false
 }
 

@@ -1,5 +1,9 @@
 import axios from "axios";
 
+export type TApiResponse = {
+  message: string;
+}
+
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:8080'
 })
@@ -7,6 +11,10 @@ const axiosInstance = axios.create({
 axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axiosInstance.defaults.headers.common['Content-Type'] = 'application/json';
 
-export const getSlowResponse = () => {
-  return axiosInstance.get('/')
+export const getHello = () => {
+  return axiosInstance.get<TApiResponse>('/hello')
+}
+
+export const postEcho = (message: string) => {
+  return axiosInstance.post<TApiResponse>('/echo', {message})
 }
